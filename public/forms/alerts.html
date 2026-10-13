@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>New testimonial alerts</title>
+</head>
+<body>
+<!--
+  Netlify reads this hidden form when the site deploys, so it knows about the
+  "new-testimonial" form. Nobody fills it in. /api/submit sends one entry here
+  for every new testimonial, and Netlify's form notifications email it to the owner.
+-->
+<form name="new-testimonial" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input name="bot-field">
+  <input name="name">
+  <input name="programme">
+  <input name="stars">
+  <textarea name="snippet"></textarea>
+  <input name="link">
+</form>
+</body>
+</html>

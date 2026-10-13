@@ -1,0 +1,15 @@
+{
+  "name": "kiitos",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Kiitos, a self-hosted testimonial engine that runs on Netlify Functions and Netlify Blobs.",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "0.131.0",
+    "@netlify/blobs": "^8.2.0",
+    "@netlify/functions": "^3.1.10"
+  }
+}

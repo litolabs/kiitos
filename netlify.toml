@@ -1,0 +1,36 @@
+# Tells Netlify how to build and serve the Testimonial Engine.
+# The site is plain HTML, CSS and JavaScript, so nothing needs building.
+# The one step on each deploy checks for a newer Kiitos (see scripts/update.mjs).
+
+[build]
+  publish = "public"
+  command = "node scripts/update.mjs"
+
+# Used by the "Deploy to Netlify" button: Netlify asks for these while
+# setting up a new copy of Kiitos.
+[template.environment]
+  ADMIN_PASSWORD = "Choose a password for your Kiitos admin. You will use it to log in."
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# Pretty form links, so /f/share shows the form page
+# while keeping the clean address in the browser bar.
+[[redirects]]
+  from = "/f/*"
+  to = "/form.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# The admin area must never be shown inside another website's frame.
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    Cache-Control = "no-store"

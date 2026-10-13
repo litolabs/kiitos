@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kiitos</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%E2%AD%90%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/css/form.css">
+</head>
+<body>
+  <div class="shell">
+    <main>
+      <section class="step is-active">
+        <h1><span class="highlight">Kiitos</span></h1>
+        <p class="helper">Your testimonial engine. Pick a form below to try it out.</p>
+        <div class="actions" id="forms"><p class="muted">Loading forms&hellip;</p></div>
+      </section>
+    </main>
+  </div>
+  <script>
+    fetch("/api/forms")
+      .then((r) => r.json())
+      .then(({ forms }) => {
+        const box = document.getElementById("forms");
+        box.replaceChildren(...forms.map((f) => {
+          const a = document.createElement("a");
+          a.className = "btn";
+          a.href = f.url;
+          a.textContent = f.title;
+          return a;
+        }));
+      })
+      .catch(() => { document.getElementById("forms").textContent = "Couldn't load the forms just now."; });
+  </script>
+</body>
+</html>
